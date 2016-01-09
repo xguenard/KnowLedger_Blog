@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>Accueil</title>
+    </head>
+    
+    <body>
+        <h1>Ceci est la page d'accueil, la data est {{ la_date }}.</h1>
+        <p>il faut specifier quelle est la valeur de la_date dans l'appel de la fonction 
+            render_template</p>
+    </body>
+</html>
+
+Creer des vars dans les templates :
+{% set menu = ['accueil', 'news', 'contact'] %}
+
+{{ }} = afficher
+{% %} = tout le reste
+{# #} = jinja commentaires
+
+exemple de boucle = menu inaccessible en dehors des with
+{% with menu = [ '1' , '2' , '3' ] %}
+    {{ menu[0] }}
+    {{ menu[1] }}
+{% endwith %}
+{% if condition %} {% elif endif %}
+
+{% for mot in mots %}
+    <li>{{ mot }} </li>
+{% endfor %}
+
+filtres
+appliquer une fonction sur un variable, la variable est x
+{{ x | filtre }}
+{# ou, si le filtre utilise dispose de paremetres : #}
+{{x |filtre('params') }}
+
+exemple, mettre en majuscule :
+{{ titre | capitalize }}
+
+concatener :
+{{ [ 'salut' , 'roger' ] | join(',') }}
+
+inclusion de templates :
+{{ include 'header.html' }}
+
+ heritage de templates :
+ TEmplate parent
+<!DOCTYPE html>
+<html>
+    <head>
+    {% block header %}
+        <meta charset="utf-8" />
+        <title>{% block titre %}Titre par défaut{% endblock %}</title>
+    {% endblock %}
+    </head>
+
+    <body>
+        {% block corps %}{% endblock %}        
+        {% block footer %}{% endblock %}
+    </body>
+</html>
+
+Template enfant
+
+{% extends "squelette.html" %}
+
+{% block titre %}Page de contact{% endblock %}
+
+{% block corps %}
+<h1>Page de contact</h1>
+<form action="" method="post">
+    <input type="text" name="nom" value="Votre nom" />
+    <textarea name="message">Votre message ici.</textarea>
+    <input type="submit" value="Envoyer" />
+</form>
+{% endblock %}
+
+
+{% block footer %}
+<footer>Copyright monsite.fr 2009-2012</footer>
+{% endblock %}
+

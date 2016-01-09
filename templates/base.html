@@ -1,0 +1,56 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <link href="{{ url_for('static', filename='blog_base.css') }}" 
+            rel="stylesheet" type="text/css"  media="all" />
+    <title>{% block titre %}Knowledger{% endblock %}</title>
+	{% block head %}{% endblock %}
+	</head>
+	
+	<body>
+	{% block header %}
+		<header>
+          <a href="home.html"><img src="{{ url_for('static', filename='images/logo_orange.png') }}" 
+                        title="logo" /></a>
+		</header>
+        
+        <nav>
+            <ul>
+                <li><a href="home.html" current="1">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+		</nav>
+	{% endblock %}
+		
+		<div class="corpus">
+		{% block sidebar %}
+			<aside>
+				<h4>Categories</h4>
+				<ul>
+            <li><img src="{{ url_for('static', filename='images/pointer.png') }}" 
+            /><a>Programming </a></li>
+            <li><img src="{{ url_for('static', filename='images/pointer.png') }}" 
+            /><a>Bitcoin</a></li>
+            <li><img src="{{ url_for('static', filename='images/pointer.png') }}" 
+            /><a>Other</a></li>
+				</ul>
+			</aside>
+		{% endblock %}
+		{% block page %}{% endblock %}
+		</div>
+
+	{% block footer %}
+        <footer>
+            <ul>
+                <li><a href="index.html">Home</a></li> |
+                <li><a href="single.html">About</a></li> |
+                <li><a href="feedback.html">Contact</a></li>
+            </ul>
+            <p>&copy; 2016 KnowLedger</p>
+        </footer>
+	{% endblock %}
+    </body>
+</html>
+
