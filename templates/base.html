@@ -19,9 +19,9 @@
         
         <nav>
             <ul>
-                <li><a href="home.html" current="1">Home</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="contact.html">Contact</a></li>
+                <li><a href="/" {% if page == 1 %} current='1' {% endif %}       >Home</a></li>
+                <li><a href="/about" {% if page == 2 %} current='1' {% endif %}  >About</a></li>
+                <li><a href="/contact" {% if page == 3 %} current='1' {% endif %}>Contact</a></li>
             </ul>
 		</nav>
 	{% endblock %}
@@ -43,11 +43,11 @@
 
 	{% block footer %}
         <footer>
-            <ul>
-                <li><a href="index.html">Home</a></li> |
-                <li><a href="single.html">About</a></li> |
-                <li><a href="feedback.html">Contact</a></li>
-            </ul>
+             <ul>
+                <li><a href="/" {% if page == 1 %} current='1' {% endif %}       >Home</a></li>
+                <li><a href="/about" {% if page == 2 %} current='1' {% endif %}  >About</a></li>
+                <li><a href="/contact" {% if page == 3 %} current='1' {% endif %}>Contact</a></li>
+            </ul>           
             <p>&copy; 2016 KnowLedger</p>
         </footer>
 	{% endblock %}
