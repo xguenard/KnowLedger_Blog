@@ -4,19 +4,18 @@
 
 {% for i in range( 1 ) %}
 <div class="article-preview">
-
 		<a href="article1.html"><img src="{{ url_for('static', filename='images/coding.jpg') }}" title="coding" /></a>
-
 		
-	<article>
         <h2> {{ title_list[i] }} </h2>
+	<article>
         {{ summaries_list[i] | markdown }}
-
+	</article>
+    <div class="under_line">
 		<ul>
-            <li><a href="#">:{{date_list[i] }}</a></li>
+            <li><a href="#">{{date_list[i] }}</a></li>
 			<li><a href="#">Readmore</a></li>
 		</ul>
-	</article>
+   <div>
 
 {% endfor %}
 {% endblock %}
