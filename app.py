@@ -25,7 +25,9 @@ def index():
         titles.append( elem[1] )
 
     return render_template('home.html', title_list = titles , date_list = dates
-                          , summaries_list = article_preview, page = 1)
+                          , summaries_list = article_preview
+                          , nb_elem = website_content.getSizePreview()
+                          , page = 1)
 
 
 @app.route('/fr')
@@ -50,12 +52,7 @@ def print_article_fr(id_article):
 #FILTERS
 @app.template_filter("markdown")
 def render_markdown(markdown_text):
-    return Markup( markdown.markdown( markdown_text))
-
-@app.template_filter("max_elem")
-def get_max():
-    global max_elem
-    return max_elem
+    return Markup( markdown.markdown(markdown_text))
 
 @app.template_filter("puce_url")
 def puce():
