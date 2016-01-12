@@ -6,14 +6,14 @@
 <div class="article-preview">
 		<a href="article1.html"><img src="{{ url_for('static', filename='images/coding.jpg') }}" title="coding" /></a>
 		
-        <h2> {{ title_list[i] }} </h2>
+        <h2> {{ metadata_list[i][1] }} </h2>
 	<article>
-        {{ summaries_list[i] | markdown }}
+        {{ article_list[i] | markdown }}
 	</article>
     <div class="under_line">
 		<ul>
-            <li><a href="#">{{date_list[i] }}</a></li>
-			<li><a href="#">Readmore</a></li>
+            <li><a href="#">{{ metadata_list[i][0] }}</a></li>
+            <li><a href="/article/{{ metadata_list[i][2] }}">{{ read_link }}</a></li>
 		</ul>
    <div>
 

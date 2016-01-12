@@ -12,27 +12,30 @@ website_content = data_wrapper.Content()
 #PURE FLASK ROUTINES (app.route, filters, ... )
 
 #HOME PAGE
-@app.route('/')
-def index():
+def render_home( lang ):
     global website_content
-    website_content.is_en = True
+    website_content.is_en = lang
     article_preview , meta_preview = website_content.getPreviewList()
-    dates = []
-    titles = []
+    
+    readmore = "Readmore"
+    if not lang:
+        readmore = "Lire"
 
-    for elem in meta_preview:
-        dates.append( elem[0] )
-        titles.append( elem[1] )
-
-    return render_template('home.html', title_list = titles , date_list = dates
-                          , summaries_list = article_preview
+    return render_template('home.html', metadata_list = meta_preview
+                          , article_list = article_preview
                           , nb_elem = website_content.getSizePreview()
+                          , read_link = readmore
                           , page = 1)
 
 
+@app.route('/')
+def index():
+    return render_home( True )
+    
 @app.route('/fr')
 def index_fr():
-    return render_template('home.html')
+    return render_home( False )
+
 #ABOUT
 @app.route('/about')
 def about():
@@ -44,10 +47,10 @@ def contact():
     return render_template('contact.html' , page = 3)
 
 #ARTICLES
-@app.route('/article/fr/<int:id_article>')
-def print_article_fr(id_article):
-    f = open('content/posts/fr/{}.md'.format( get_article_name( id_article , True )) , 'r' )
-    return render_template('article.html', content = f.read())
+@app.route('/article/<article_title>')
+def print_article_fr(article_title):
+    global website_content
+    return render_template('article.html', content = website_content.GetArticle( article_title ) )
 
 #FILTERS
 @app.template_filter("markdown")
