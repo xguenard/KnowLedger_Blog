@@ -5,11 +5,9 @@
 {% for i in range( nb_elem ) %}
 <div class="article-preview">
 		<a href="article1.html"><img src="{{ url_for('static', filename='images/coding.jpg') }}" title="coding" /></a>
-		
-        <h2> {{ metadata_list[i][1] }} </h2>
 	<article>
+	<h2> {{ metadata_list[i][1] }} </h2>
         {{ article_list[i] | markdown }}
-	</article>
     <div class="under_line">
 		<ul>
             <li><a href="#">{{ metadata_list[i][0] }}</a></li>
