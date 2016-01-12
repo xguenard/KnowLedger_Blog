@@ -2,23 +2,21 @@
 
 {% block page %}
 
-{% for i in range( 2 ) %}
+{% for i in range( 1 ) %}
 <div class="article-preview">
 
 		<a href="article1.html"><img src="{{ url_for('static', filename='images/coding.jpg') }}" title="coding" /></a>
 
 		
 	<article>
-        <p> {{ title_list[i] }} </p>
+        <h2> {{ title_list[i] }} </h2>
+        {{ summaries_list[i] | markdown }}
 
 		<ul>
-			<li><a href="#">Technology</a></li>
-            <li><a href="#">: {{date_list[i] }}</a></li>
+            <li><a href="#">:{{date_list[i] }}</a></li>
 			<li><a href="#">Readmore</a></li>
 		</ul>
 	</article>
 
 {% endfor %}
-		<p>sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
-</div>
 {% endblock %}

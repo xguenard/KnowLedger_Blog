@@ -1,4 +1,4 @@
 # format :
 # date , titre anglais , titre francais, nom fichier anglais ( sans.md), nom fichier francais
 # tout doit etre separe par ' , '
-11/01/2017 , Welcome , Bonjour, first_article , premier_article
+11/01/2017 , Bonjour , premier_article
