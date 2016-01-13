@@ -5,9 +5,9 @@
 {% for i in range( nb_elems ) %}
 <div class="article-preview">
     
-    <a ><img src={{ url_for('static' , filename = meta_list[i][2] | preview_image_url ) }} /></a>
 	<article>
 	<h2> {{ meta_list[i][1] }} </h2>
+	<a ><img src={{ url_for('static' , filename = meta_list[i][2] | preview_image_url ) }} /></a>
         {{ prevs_list[i] | markdown }}
     <div class="under_line">
 		<ul>
