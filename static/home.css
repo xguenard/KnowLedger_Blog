@@ -2,16 +2,16 @@
 
 .article-preview img
 {
-	float:left;
+	float:right;
 	margin-left: 20px ;
-	margin-right: -20px;
-	margin-top:20px;
+	margin-top:0px;
+	margin-bottom:10px;
 	box-shadow: 10px 10px 10px rgb(223, 223, 223);
 }
 
 .article-preview
 {
-	width: 76%;
+	width: 100%;
 	float: left;
 	padding-bottom: 20px;
 	padding: 20px 0px 20px 20px;
@@ -26,6 +26,7 @@
 	font-family: Arial, Helvetica, sans-serif;
 	color:#333;
 	padding-bottom: 15px;
+	
 }
 
 .under_line ul li a
@@ -60,10 +61,17 @@
 article
 {
 	float: left;
-	width: 53%;
+	width: 80%;
 	margin-left: 10%;
 	font-family: Arial, Helvetica, sans-serif;
 	color:#333;
 	border-bottom: 1px ridge #666;
 	text-align: justify;
+}
+
+@media screen and (max-width: 800px) {
+	.article-preview img 
+	{
+		width: 70%;
+	}
 }
