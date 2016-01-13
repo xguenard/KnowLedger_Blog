@@ -4,9 +4,10 @@
 
 {% for i in range( nb_elem ) %}
 <div class="article-preview">
-		<a><img src="{{ url_for('static', filename= metadata_list[i][2] | preview_image_url ) }}"/></a>
+		
 	<article>
 	<h2> {{ metadata_list[i][1] }} </h2>
+	<a><img src="{{ url_for('static', filename= metadata_list[i][2] | preview_image_url ) }}"/></a>
         {{ article_list[i] | markdown }}
     <div class="under_line">
 		<ul>
