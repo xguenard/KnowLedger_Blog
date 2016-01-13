@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block page %}
+
+{% for i in range( nb_elems ) %}
+<div class="article-preview">
+    
+    <a ><img src={{ url_for('static' , filename = meta_list[i][2] | preview_image_url ) }} /></a>
+	<article>
+	<h2> {{ meta_list[i][1] }} </h2>
+        {{ prevs_list[i] | markdown }}
+    <div class="under_line">
+		<ul>
+            <li><a>{{ meta_list[i][0] }}</a></li>
+            <li><a href="/article/{{ meta_list[i][2] }}">{{ read_more }}</a></li>
+		</ul>
+	</div>
+	</article>
+</div>
+{% endfor %}
+{% endblock %}

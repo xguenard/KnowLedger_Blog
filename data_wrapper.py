@@ -46,7 +46,7 @@ class Content:
             tmp = open('content/posts/fr/{}_preview.md'.format( row[2] ) , 'r' )
             self.fr_article_preview_list.append( tmp.read() )
     
-    def GetArticle(self, title ):
+    def getArticle(self, title ):
         """
             return the article
         """
@@ -56,6 +56,13 @@ class Content:
         else:
             f = open('content/posts/fr/{}.md'.format( title ) , 'r' )
             return f.read()
+
+    def getPreviewImagePath( self, title ):
+       """
+           given a title return the image's path related to this title.
+       """
+       return "images/{}_preview_img.png".format( title )
+
 
 
     def getSizePreview(self ):
@@ -76,4 +83,9 @@ class Content:
         else:
             return self.fr_article_preview_list[ -nb : ] , self.fr_metadata_list[-nb:]
 
+    def getFullList( self ):
+       if self.is_en:
+           return self.en_article_preview_list[:: -1] , self.en_metadata_list[:: -1], len(self.en_metadata_list)
+       else:
+           return self.fr_article_preview_list[:: -1] , self.fr_metadata_list[:: -1], len(self.fr_metadata_list)
 

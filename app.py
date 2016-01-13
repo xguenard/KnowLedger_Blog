@@ -1,4 +1,4 @@
-from flask import Flask, render_template, Markup
+from flask import Flask, render_template, Markup, url_for
 import markdown
 import data_wrapper
 
@@ -47,19 +47,36 @@ def contact():
     return render_template('contact.html' , page = 3)
 
 #ARTICLES
-@app.route('/article/<article_title>')
-def print_article_fr(article_title):
+@app.route('/articles')
+def print_all_articles():
     global website_content
-    return render_template('article.html', content = website_content.GetArticle( article_title ) )
+    prevs , metas, nb_elem = website_content.getFullList()
+    return render_template('articles_list.html', prevs_list = prevs, meta_list = metas 
+                          , nb_elems = nb_elem, page = 4)
+
+
+@app.route('/article/<article_title>')
+def print_article(article_title):
+    global website_content
+    return render_template('article.html', content = website_content.getArticle( article_title ) )
 
 #FILTERS
 @app.template_filter("markdown")
 def render_markdown(markdown_text):
     return Markup( markdown.markdown(markdown_text))
 
-@app.template_filter("puce_url")
-def puce():
-    return url_for('static', filename='image/pointer.png')
+@app.template_filter("preview_image_url")
+def get_image_path( title ):
+    global website_content
+    return website_content.getPreviewImagePath( title ) 
+
+@app.context_processor
+def header_data():
+    global website_content
+    if website_content.is_en:
+        return dict( home = "Home" , about = "About", read_more = "Read more")
+    else:
+        return dict( home = "Accueil" , about = "A propos" , read_more = "Lire")
 
 if __name__ == "__main__":
     app.run(debug=True)
