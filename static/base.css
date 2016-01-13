@@ -147,3 +147,8 @@ footer li a
     color:rgb(103, 141, 223);
     font-size:16px;
 }
+
+footer ul li a[current] 
+{
+    color:white;
+}
