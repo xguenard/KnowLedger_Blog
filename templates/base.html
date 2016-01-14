@@ -6,9 +6,9 @@
             rel="stylesheet" type="text/css"  media="all" />
         <link href="{{ url_for('static', filename='home.css') }}" 
             rel="stylesheet" type="text/css"  media="all" />
-    <title>{% block titre %}Knowledger{% endblock %}</title>
-    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='images/knldg_icone.ico') }}" />
-
+    <title>{% block titre %}KnowLedger{% endblock %}</title>
+	<link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='images/knldg_icone.ico') }}" />
+	<link rel="shortcut icon" type="image/x-icon" href="{{ url_for('static', filename='images/knldg_icone.ico') }}" />
 	{% block head %}{% endblock %}
 	</head>
 	
@@ -26,24 +26,16 @@
                 <li><a href="/about" {% if page == 2 %} current='1' {% endif %}  >{{ about }}</a></li>
                 <li><a href="/contact" {% if page == 3 %} current='1' {% endif %}>Contact</a></li>
             </ul>
+
 		</nav>
+		
+		<div class="change_lang">
+			<ul>
+				<li><a href="#">FR</a></li>
+			</ul>
+		</div>
 	{% endblock %}
 		
-		{% block sidebar %}
-        {#
-        <aside>
-				<h4>Categories</h4>
-				<ul>
-            <li><img src="{{ url_for('static', filename='images/pointer.png') }}" 
-            /><a>Programming </a></li>
-            <li><img src="{{ url_for('static', filename='images/pointer.png') }}" 
-            /><a>Bitcoin</a></li>
-            <li><img src="{{ url_for('static', filename='images/pointer.png') }}" 
-            /><a>Other</a></li>
-				</ul>
-            </aside> 
-         #}
-		{% endblock %}
 
 		{% block page %}
         {% endblock %}
