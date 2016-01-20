@@ -50,12 +50,15 @@ class Content:
         """
             return the article
         """
-        if self.is_en:
+        if any( elm[2] == title for elm in self.en_metadata_list):
+            self.is_en = True
             f = open('content/posts/en/{}.md'.format( title ) , 'r' )
             return f.read()
-        else:
+        if any( elm[2] == title for elm in self.fr_metadata_list):
+            self.is_en = False
             f = open('content/posts/fr/{}.md'.format( title ) , 'r' )
             return f.read()
+        return 'These aren\'t the droids you are looking for...'
 
     def get_preview_img_path( self, title ):
        """

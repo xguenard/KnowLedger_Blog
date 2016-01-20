@@ -1,4 +1,4 @@
-from flask import Flask, render_template, Markup, url_for
+from flask import Flask, render_template, Markup, url_for, redirect
 import markdown
 import data_wrapper
 
@@ -12,7 +12,7 @@ website_content = data_wrapper.Content()
 #PURE FLASK ROUTINES (app.route, filters, ... )
 
 #HOME PAGE
-def render_home( ):
+def render_home():
     global website_content
     article_preview , meta_preview = website_content.get_preview_list()
     readmore = "Readmore"
@@ -36,7 +36,7 @@ def index_fr():
         website_content.is_en = False
     else:
         website_content.is_en = True
-    return render_home()
+    return redirect("/")
 
 #ABOUT
 @app.route('/about')
