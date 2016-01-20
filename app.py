@@ -12,29 +12,31 @@ website_content = data_wrapper.Content()
 #PURE FLASK ROUTINES (app.route, filters, ... )
 
 #HOME PAGE
-def render_home( lang ):
+def render_home( ):
     global website_content
-    website_content.is_en = lang
-    article_preview , meta_preview = website_content.getPreviewList()
-    
+    article_preview , meta_preview = website_content.get_preview_list()
     readmore = "Readmore"
-    if not lang:
+    if not website_content.is_en:
         readmore = "Lire"
 
     return render_template('home.html', metadata_list = meta_preview
                           , article_list = article_preview
-                          , nb_elem = website_content.getSizePreview()
+                          , nb_elem = website_content.get_size_preview()
                           , read_link = readmore
                           , page = 1)
 
-
 @app.route('/')
 def index():
-    return render_home( True )
-    
-@app.route('/fr')
+    return render_home()
+
+@app.route('/switch')
 def index_fr():
-    return render_home( False )
+    global website_content
+    if website_content.is_en:
+        website_content.is_en = False
+    else:
+        website_content.is_en = True
+    return render_home()
 
 #ABOUT
 @app.route('/about')
@@ -50,7 +52,7 @@ def contact():
 @app.route('/articles')
 def print_all_articles():
     global website_content
-    prevs , metas, nb_elem = website_content.getFullList()
+    prevs , metas, nb_elem = website_content.get_full_list()
     return render_template('articles_list.html', prevs_list = prevs, meta_list = metas 
                           , nb_elems = nb_elem, page = 4)
 
@@ -58,7 +60,8 @@ def print_all_articles():
 @app.route('/article/<article_title>')
 def print_article(article_title):
     global website_content
-    return render_template('article.html', content = website_content.getArticle( article_title ) )
+    return render_template('article.html'\
+            , content = website_content.get_article( article_title ) )
 
 #FILTERS
 @app.template_filter("markdown")
@@ -68,15 +71,15 @@ def render_markdown(markdown_text):
 @app.template_filter("preview_image_url")
 def get_image_path( title ):
     global website_content
-    return website_content.getPreviewImagePath( title ) 
+    return website_content.get_preview_img_path( title ) 
 
 @app.context_processor
 def header_data():
     global website_content
     if website_content.is_en:
-        return dict( home = "Home" , about = "About", read_more = "Read more")
+        return dict( home = "Home" , about = "About", read_more = "Read more", lang = "FR")
     else:
-        return dict( home = "Accueil" , about = "A propos" , read_more = "Lire")
+        return dict( home = "Accueil" , about = "A propos" , read_more = "Lire", lang = "EN")
 
 if __name__ == "__main__":
     app.run(debug=True)

@@ -14,9 +14,9 @@ class Content:
         self.fr_metadata_list = []
         self.is_en = True
 
-        self.fillAtriclesAndMetadatas()
+        self.fill_atricles_metadatas()
     
-    def fillAtriclesAndMetadatas(self):
+    def fill_atricles_metadatas(self):
         """
             will get all data for previews, titles, dates...
         """
@@ -46,7 +46,7 @@ class Content:
             tmp = open('content/posts/fr/{}_preview.md'.format( row[2] ) , 'r' )
             self.fr_article_preview_list.append( tmp.read() )
     
-    def getArticle(self, title ):
+    def get_article(self, title ):
         """
             return the article
         """
@@ -57,7 +57,7 @@ class Content:
             f = open('content/posts/fr/{}.md'.format( title ) , 'r' )
             return f.read()
 
-    def getPreviewImagePath( self, title ):
+    def get_preview_img_path( self, title ):
        """
            given a title return the image's path related to this title.
        """
@@ -65,7 +65,7 @@ class Content:
 
 
 
-    def getSizePreview(self ):
+    def get_size_preview(self ):
         nb_articles = 0
 
         if self.is_en :
@@ -76,16 +76,18 @@ class Content:
         return nb_articles if nb_articles < self.preview_max else self.preview_max
 
 
-    def getPreviewList(self ):
-        nb = self.getSizePreview( )
+    def get_preview_list(self ):
+        nb = self.get_size_preview( )
         if self.is_en:
             return self.en_article_preview_list[ -nb : ] , self.en_metadata_list[-nb:]
         else:
             return self.fr_article_preview_list[ -nb : ] , self.fr_metadata_list[-nb:]
 
-    def getFullList( self ):
+    def get_full_list( self ):
        if self.is_en:
-           return self.en_article_preview_list[:: -1] , self.en_metadata_list[:: -1], len(self.en_metadata_list)
+           return self.en_article_preview_list[:: -1] \
+                   , self.en_metadata_list[:: -1], len(self.en_metadata_list)
        else:
-           return self.fr_article_preview_list[:: -1] , self.fr_metadata_list[:: -1], len(self.fr_metadata_list)
+           return self.fr_article_preview_list[:: -1] \
+                   , self.fr_metadata_list[:: -1], len(self.fr_metadata_list)
 
