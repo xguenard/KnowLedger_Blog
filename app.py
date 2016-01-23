@@ -1,4 +1,5 @@
-from flask import Flask, render_template, Markup, url_for, redirect
+from flask import Flask, render_template\
+        , render_template_string , Markup, url_for, redirect
 import markdown
 import data_wrapper
 
@@ -66,7 +67,8 @@ def print_article(article_title):
 #FILTERS
 @app.template_filter("markdown")
 def render_markdown(markdown_text):
-    return Markup( markdown.markdown(markdown_text))
+    output = render_template_string( Markup(markdown_text ))
+    return Markup( markdown.markdown(output))
 
 @app.template_filter("preview_image_url")
 def get_image_path( title ):
