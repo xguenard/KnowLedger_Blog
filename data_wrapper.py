@@ -1,4 +1,7 @@
 #PYTHON TOOLS (file management ... )
+
+
+path = '/home/StormDev/KnowLedger_Blog/'
 class Content:
     
     def __init__(self):
@@ -22,7 +25,7 @@ class Content:
         """
         self.en_article_preview_list = []
         self.en_metadata_list = []
-        en_file = open('content/posts/en/summary.txt')
+        en_file = open(path+'content/posts/en/summary.txt')
 
         for line in en_file:
             if line[0] == '#':
@@ -30,12 +33,12 @@ class Content:
             self.en_metadata_list.append( line[:-1].split(' , ' ) )
         
         for row in self.en_metadata_list:
-            tmp = open('content/posts/en/{}_preview.md'.format( row[2] ) , 'r' )
+            tmp = open(path+'content/posts/en/{}_preview.md'.format( row[2] ) , 'r' )
             self.en_article_preview_list.append( tmp.read() )
         
         self.fr_article_preview_list = []
         self.fr_metadata_list = []
-        fr_file = open('content/posts/fr/sommaire.txt')
+        fr_file = open(path+'content/posts/fr/sommaire.txt')
 
         for line in fr_file:
             if line[0]  == '#':
@@ -43,7 +46,7 @@ class Content:
             self.fr_metadata_list.append( line[:-1].split(' , ') )
 
         for row in self.fr_metadata_list:
-            tmp = open('content/posts/fr/{}_preview.md'.format( row[2] ) , 'r' )
+            tmp = open(path+'content/posts/fr/{}_preview.md'.format( row[2] ) , 'r' )
             self.fr_article_preview_list.append( tmp.read() )
     
     def get_article(self, title ):
@@ -52,11 +55,11 @@ class Content:
         """
         if any( elm[2] == title for elm in self.en_metadata_list):
             self.is_en = True
-            f = open('content/posts/en/{}.md'.format( title ) , 'r' )
+            f = open(path+'content/posts/en/{}.md'.format( title ) , 'r' )
             return f.read()
         if any( elm[2] == title for elm in self.fr_metadata_list):
             self.is_en = False
-            f = open('content/posts/fr/{}.md'.format( title ) , 'r' )
+            f = open(path+'content/posts/fr/{}.md'.format( title ) , 'r' )
             return f.read()
         return 'These aren\'t the droids you are looking for...'
 
